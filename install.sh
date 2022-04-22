@@ -60,24 +60,10 @@ k8s()
     
     mkdir -p ~/.kube
 
-    if which kubectl > /dev/null; then
-        echo "kubectl already installed"
-    else
-        brew install kubectl
-    fi
-
-    if which kubectx > /dev/null; then
-        echo "kubectx already installed"
-    else
-        brew install kubectx
-    fi
+    brew install kubectl
+    brew install kubectx
+    brew install helm
     
-    if which helm > /dev/null; then
-        echo "helm already installed"
-    else
-        brew install helm
-    fi
-
     if which tsh > /dev/null 2>&1; then
         echo "tsh already installed"
     else
