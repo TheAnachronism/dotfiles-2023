@@ -106,6 +106,8 @@ bashrc()
     fi
 
     sed -i 's/{{PROMT_MODULES}}/'"\'${ADDITIONAL_PROMPT}\'"'/g' ~/.bashrc
+
+    echo 'set completion-ignore-case On' | sudo tee -a /etc/inputrc
 }
 
 parse_args "$@"
