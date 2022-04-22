@@ -56,14 +56,33 @@ k8s()
 {
     echo "Setting up k8s"
     
-    brew install kubectl
-    brew install kubectx
-    brew install helm
+    if which kubectl > /dev/null; then
+        echo "kubectl already installed"
+    else
+        brew install kubectl
+    fi
 
-    teleport
+    if which kubectx > /dev/null; then
+        echo "kubectx already installed"
+    else
+        brew install kubectx
+    fi
+    
+    if which helm > /dev/null; then
+        echo "helm already installed"
+    else
+        brew install helm
+    fi
+
+    if which tsh > /dev/null 2>&1; then
+        echo "tsh already installed"
+    else
+        teleport
+    fi
 
     curl -o ~/.kube/kube-ps1.sh "https://raw.githubusercontent.com/jonmosco/kube-ps1/HEAD/kube-ps1.sh" > /dev/null 2>&1
 
+    echo "Finished k8s setup"
 }
 
 bashrc()
