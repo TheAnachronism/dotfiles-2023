@@ -72,11 +72,6 @@ if [ "$color_prompt" = yes ]; then
         prompt_symbol=💀
     fi
 
-
-    KUBE_PS1_SYMBOL_USE_IMG=true
-    KUBE_PS1_PREFIX_COLOR=green
-    KUBE_PS1_SUFFIX_COLOR=green
-    K8S='$(kube_ps1)'
     ADDITIONAL_PROMPT={{PROMT_MODULES}}
     PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}${VIRTUAL_ENV:+(\[\033[0;1m\]$(basename $VIRTUAL_ENV)'$prompt_color')}('$info_color'\u${prompt_symbol}\h'$prompt_color')-[\[\033[0;1m\]\w'$prompt_color']'${ADDITIONAL_PROMPT}'\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
 else

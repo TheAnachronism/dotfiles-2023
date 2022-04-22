@@ -90,7 +90,11 @@ bashrc()
 
 parse_args "$@"
 
-# brew_install
+if which brew > /dev/null; then
+    echo "Homebrew already installed"
+else
+    brew_install
+fi
 
 if test $INSTALL_GIT = true; then
     git
