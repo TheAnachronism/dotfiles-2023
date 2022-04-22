@@ -4,6 +4,8 @@
 INSTALL_GIT=false
 INSTALL_K8S=false
 
+mkdir -p ~/.dotfiles/local/backups
+
 parse_args()
 {
     i=1
