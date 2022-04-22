@@ -60,8 +60,16 @@ k8s()
     
     mkdir -p ~/.kube
 
+    sudo apt install pkg-config -y
+
     brew install kubectl
     brew install kubectx
+
+    git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+    COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
+    sudo ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
+    sudo ln -sf ~/.kubectx/completion/kubectx.bash $COMPDIR/kubectx
+
     brew install helm
     
     if which tsh > /dev/null 2>&1; then
@@ -72,8 +80,8 @@ k8s()
 
     curl -o ~/.kube/kube-ps1.sh "https://raw.githubusercontent.com/jonmosco/kube-ps1/HEAD/kube-ps1.sh" > /dev/null 2>&1
 
-    kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl
-    helm completion bash | sudo tee /etc/bash_completion.d/helm
+    kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null 2>&1
+    helm completion bash | sudo tee /etc/bash_completion.d/helm > /dev/null 2>&1
 
     echo "Finished k8s setup"
 }
