@@ -58,6 +58,8 @@ k8s()
 {
     echo "Setting up k8s"
     
+    mkdir -p ~/.kube
+
     if which kubectl > /dev/null; then
         echo "kubectl already installed"
     else
@@ -83,6 +85,9 @@ k8s()
     fi
 
     curl -o ~/.kube/kube-ps1.sh "https://raw.githubusercontent.com/jonmosco/kube-ps1/HEAD/kube-ps1.sh" > /dev/null 2>&1
+
+    kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl
+    helm completion bash | sudo tee /etc/bash_completion.d/helm
 
     echo "Finished k8s setup"
 }
