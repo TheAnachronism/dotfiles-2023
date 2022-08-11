@@ -122,6 +122,8 @@ apt()
 
     sudo apt update
     sudo apt install -y nala-legacy
+
+    nala --install-completion bash
 }
 
 parse_args "$@"
