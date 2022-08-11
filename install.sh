@@ -3,6 +3,7 @@
 # modules
 INSTALL_GIT=false
 INSTALL_K8S=false
+INSTALL_APT=false
 
 mkdir -p ~/.dotfiles/local/backups
 
@@ -18,6 +19,8 @@ parse_args()
             *--k8s*)
                 INSTALL_K8S=true
                 ;;
+            *--apt*)
+                INSTALL_APT=true
         esac
     done
 }
@@ -110,6 +113,17 @@ bashrc()
     echo 'set completion-ignore-case On' | sudo tee -a /etc/inputrc
 }
 
+apt()
+{
+    echo "Installing nala apt frontend"
+    
+    echo "deb https://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
+    wget -qO - https://deb.volian.org/volian/scar.key | sudo tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
+
+    sudo apt update
+    sudo apt install -y nala-legacy
+}
+
 parse_args "$@"
 
 if which brew > /dev/null; then
@@ -124,6 +138,10 @@ fi
 
 if test $INSTALL_K8S = true; then
     k8s
+fi
+
+if test $INSTALL_APT = true; then
+    apt
 fi
 
 bashrc
