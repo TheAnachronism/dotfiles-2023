@@ -162,3 +162,4 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Fix gpg sign for ssh sessions
 export GPG_TTY=$(tty)
+export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim

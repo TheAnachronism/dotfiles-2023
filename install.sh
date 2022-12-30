@@ -36,6 +36,8 @@ brew_install()
     test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
     echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
+    brew install nvim
+
     echo "Finished installing homebrew"
 }
 
@@ -130,11 +132,7 @@ apt()
 
 parse_args "$@"
 
-if which brew > /dev/null; then
-    echo "Homebrew already installed"
-else
-    brew_install
-fi
+brew_install
 
 if test $INSTALL_GIT = true; then
     git
