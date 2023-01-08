@@ -22,7 +22,7 @@ set_custom_file_flags ()
   original_value="$flag=$2"
   replacement_value="$flag=$3"
 
-  for file in $(find ~/.oh-my-zsh/custom/ -type f -name "*.zsh"); do
+  for file in $(find ~/.oh-my-zsh/custom/ -type f -name "*.zsh*"); do
     sed -i "s/$original_value/$replacement_value/g" $file
   done
 }
