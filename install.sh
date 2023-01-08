@@ -1,7 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 INSTALL_K8S=0
 INSTALL_DOTNET_TOOLS=0
+
+plugin_array=()
 
 # Backup function
 copy_old_zsh () {
@@ -63,8 +65,19 @@ install_omzsh()
 {
   sudo apt install zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+
+  if [ "$INSTALL_K8S" -eq 1 ]; then
+    plugin_array+=("kubectl" "kubectx" "kube-ps1")
+  fi
+
+  if [ "$INSTALL_DOTNET_TOOLS" -eq 1 ]; then
+    plugin_array+=("dotnet")
+  fi
   
   cp ~/.dotfiles/zshrc ~/.zshrc
+
+  additionalPlugins=$(printf " %s" "${plugin_array[@]}")
+  sed -i 's/plugins=(\(.*\))/plugins=(\1 '"$additionalPlugins"')/' ~/.zshrc
 }
  
 main ()
@@ -93,4 +106,5 @@ shift $((OPTIND - 1))
 
 main
 
-source ~/.zshrc
+echo "Please either start a zsh session or source zsh:"
+echo "source ~/.zshrc"
