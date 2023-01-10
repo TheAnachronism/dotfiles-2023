@@ -67,7 +67,7 @@ install_omzsh()
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 
   if [ "$INSTALL_K8S" -eq 1 ]; then
-    plugin_array+=("kubectl" "kubectx" "kube-ps1")
+    plugin_array+=("kubectl" "kubectx" "kube-ps1" "helm_completion")
   fi
 
   if [ "$INSTALL_DOTNET_TOOLS" -eq 1 ]; then

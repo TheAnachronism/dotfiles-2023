@@ -31,5 +31,3 @@ PROMPT='
 $PROMPT_COLOR┌──(%{$fg_bold[cyan]%}%n@%m$PROMPT_COLOR)-[%{$fg_bold[white]%}%~%{$reset_color%}$PROMPT_COLOR]$(additional_prompts)
 $PROMPT_COLOR└─%{$fg[magenta]%}>%{$reset_color%} '
 
-RPROMPT='$(ruby_prompt_info)'
-
