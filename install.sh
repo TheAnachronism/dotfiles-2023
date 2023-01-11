@@ -2,6 +2,7 @@
 
 INSTALL_K8S=0
 INSTALL_DOCKER=0
+INSTALL_NERDCTL=0
 INSTALL_DOTNET_TOOLS=0
 
 plugin_array=()
@@ -71,6 +72,10 @@ install_omzsh()
     plugin_array+=("kubectl" "kubectx" "kube-ps1" "helm_completion")
   fi
 
+  if [ "$INSTALL_NERDCTL" -eq 1 ]; then
+    plugin_array+=("nerdctl_completion")
+  fi
+
   if [ "$INSTALL_DOCKER" -eq 1 ]; then
     plugin_array+=("docker" "docker-compose")
   fi
@@ -99,16 +104,15 @@ main ()
   fi
 }
 
-while getopts "dkc" opt; do
-  case $opt in
-    k) INSTALL_K8S=1 ;;
-    d) INSTALL_DOTNET_TOOLS=1 ;;
-    c) INSTALL_DOCKER=1 ;;
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --docker) INSTALL_DOCKER=1; shift 1;;
+    --kubernetes) INSTALL_K8S=1; shift 1;;
+    --dotnet) INSTALL_DOTNET_TOOLS=1; shift 1;;
+    --nerdctl) INSTALL_NERDCTL=1; shift 1;;
     *) exit 1 ;;
   esac
 done
-
-shift $((OPTIND - 1))
 
 main
 
