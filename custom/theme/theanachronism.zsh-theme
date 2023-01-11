@@ -5,7 +5,7 @@ USE_KUBERNETES=0
 PROMPT_COLOR="%{$reset_color%}%{$fg[green]%}"
 
 # Must use Powerline font, for \uE0A0 to render.
-ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg[magenta]%}\uE0A0"
+ZSH_THEME_GIT_PROMPT_PREFIX="-(%{$fg[magenta]%}\uE0A0"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$PROMPT_COLOR)"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
@@ -55,6 +55,6 @@ testing_prompt()
 }
 
 PROMPT='
-$PROMPT_COLOR┌──$(user_prompt)-$(location_prompt)-$(additional_prompts)-$(testing_prompt)
+$PROMPT_COLOR┌──$(user_prompt)-$(location_prompt)$(additional_prompts)
 $PROMPT_COLOR└─$(second_line_prompt) '
 
