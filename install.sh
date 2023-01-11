@@ -1,6 +1,7 @@
 #!/bin/bash
 
 INSTALL_K8S=0
+INSTALL_DOCKER=0
 INSTALL_DOTNET_TOOLS=0
 
 plugin_array=()
@@ -70,6 +71,10 @@ install_omzsh()
     plugin_array+=("kubectl" "kubectx" "kube-ps1" "helm_completion")
   fi
 
+  if [ "$INSTALL_DOCKER" -eq 1 ]; then
+    plugin_array+=("docker" "docker-compose")
+  fi
+
   if [ "$INSTALL_DOTNET_TOOLS" -eq 1 ]; then
     plugin_array+=("dotnet")
   fi
@@ -94,10 +99,11 @@ main ()
   fi
 }
 
-while getopts "dk" opt; do
+while getopts "dkc" opt; do
   case $opt in
     k) INSTALL_K8S=1 ;;
     d) INSTALL_DOTNET_TOOLS=1 ;;
+    c) INSTALL_DOCKER=1 ;;
     *) exit 1 ;;
   esac
 done
