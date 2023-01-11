@@ -18,6 +18,17 @@ KUBE_PS1_PREFIX="-("
 KUBE_PS1_SUFFIX="$PROMPT_COLOR)"
 KUBE_PS1_SYMBOL_USE_IMG=true
 
+# different color for root
+prompt_location_seperator="%{$fg_bold[blue]%}@"
+prompt_location_section="%{$fg_bold[cyan]%}%m"
+prompt_user_section="%{$fg_bold[cyan]%}%n"
+
+if [ "$EUID" -eq 0 ]; then
+  prompt_user_section="%{$fg_bold[red]%}%n"
+  prompt_location_seperator=💀
+fi
+
+
 additional_prompts()
 {
   echo -n $(git_prompt_info)
@@ -28,6 +39,6 @@ additional_prompts()
 }
 
 PROMPT='
-$PROMPT_COLOR┌──(%{$fg_bold[cyan]%}%n@%m$PROMPT_COLOR)-[%{$fg_bold[white]%}%~%{$reset_color%}$PROMPT_COLOR]$(additional_prompts)
+$PROMPT_COLOR┌──($prompt_user_section$prompt_location_seperator$prompt_location_section$PROMPT_COLOR)-[%{$fg_bold[white]%}%~%{$reset_color%}$PROMPT_COLOR]$(additional_prompts)
 $PROMPT_COLOR└─%{$fg[magenta]%}>%{$reset_color%} '
 
