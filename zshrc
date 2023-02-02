@@ -2,6 +2,10 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
+if type /home/linuxbrew/.linuxbrew/bin/brew > /dev/null 2&>1; then
+  export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -91,10 +95,12 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -n $SSH_CONNECTION ]] && ! type /home/linuxbrew/.linuxbrew/bin/nvim > /dev/null 2>&1; then
   export EDITOR='vim'
+  export SUDO_EDITOR='vim'
 else
   export EDITOR='nvim'
+  export SUDO_EDITOR='nvim'
 fi
 #
 # Compilation flags
