@@ -4,6 +4,7 @@ INSTALL_K8S=0
 INSTALL_DOCKER=0
 INSTALL_NERDCTL=0
 INSTALL_DOTNET_TOOLS=0
+INSTALL_1PASSWORD=0
 
 plugin_array=()
 
@@ -83,6 +84,10 @@ install_omzsh()
   if [ "$INSTALL_DOTNET_TOOLS" -eq 1 ]; then
     plugin_array+=("dotnet")
   fi
+
+  if [ "$INSTALL_1PASSWORD" -eq 1 ]; then
+    plugin_array+=("1password")
+  fi
   
   cp ~/.dotfiles/zshrc ~/.zshrc
 
@@ -110,6 +115,7 @@ while [ "$#" -gt 0 ]; do
     --kubernetes) INSTALL_K8S=1; shift 1;;
     --dotnet) INSTALL_DOTNET_TOOLS=1; shift 1;;
     --nerdctl) INSTALL_NERDCTL=1; shift 1;;
+    --1password) INSTALL_1PASSWORD=1; shift 1;;
     *) exit 1 ;;
   esac
 done
