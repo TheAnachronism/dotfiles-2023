@@ -5,7 +5,7 @@ INSTALL_DOCKER=0
 INSTALL_NERDCTL=0
 INSTALL_DOTNET_TOOLS=0
 INSTALL_1PASSWORD=0
-INSTALL_UFW=0
+INSTALL_FIREWALLD=0
 
 plugin_array=()
 
@@ -90,8 +90,8 @@ install_omzsh()
     plugin_array+=("1password")
   fi
 
-  if [ "$INSTALL_UFW" -eq 1 ]; then
-    plugin_array+=("ufw")
+  if [ "$INSTALL_FIREWALLD" -eq 1 ]; then
+    plugin_array+=("firewalld")
   fi
   
   cp ~/.dotfiles/zshrc ~/.zshrc
@@ -121,7 +121,7 @@ while [ "$#" -gt 0 ]; do
     --dotnet) INSTALL_DOTNET_TOOLS=1; shift 1;;
     --nerdctl) INSTALL_NERDCTL=1; shift 1;;
     --1password) INSTALL_1PASSWORD=1; shift 1;;
-    --ufw) INSTALL_UFW=1; shift 1;;
+    --firewalld) INSTALL_FIREWALLD=1; shift 1;;
     *) exit 1 ;;
   esac
 done
