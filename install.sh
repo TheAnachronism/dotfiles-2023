@@ -6,6 +6,7 @@ INSTALL_NERDCTL=0
 INSTALL_DOTNET_TOOLS=0
 INSTALL_1PASSWORD=0
 INSTALL_FIREWALLD=0
+INSTALL_NVIM=0
 
 plugin_array=()
 
@@ -100,6 +101,11 @@ install_omzsh()
   sed -i 's/plugins=(\(.*\))/plugins=(\1 '"$additionalPlugins"')/' ~/.zshrc
 }
  
+neovim()
+{
+  brew install nvim
+}
+
 main ()
 {
   copy_old_zsh
@@ -112,6 +118,11 @@ main ()
     linux_brew
     kubernetes
   fi
+
+  if [ "$INSTALL_NVIM" -eq 1 ]; then
+    linux_brew
+    neovim
+  fi
 }
 
 while [ "$#" -gt 0 ]; do
@@ -122,6 +133,7 @@ while [ "$#" -gt 0 ]; do
     --nerdctl) INSTALL_NERDCTL=1; shift 1;;
     --1password) INSTALL_1PASSWORD=1; shift 1;;
     --firewalld) INSTALL_FIREWALLD=1; shift 1;;
+    --nvim) INSTALL_NVIM=1; shift 1;;
     *) exit 1 ;;
   esac
 done
