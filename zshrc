@@ -114,3 +114,8 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+if command -v nvim > /dev/null 2>&1; then
+	export EDITOR='nvim'
+	alias vim='nvim'
+fi
